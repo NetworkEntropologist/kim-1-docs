@@ -12,18 +12,18 @@ Your KIM-1 system comes to you complete with all components mounted and tested a
 
 We recommend that you read all of this manual before applying power to or attempting to operate your KIM-1 module. In the order presented, you will find:
 
-[Chapter 2](docs/kim-1-users-manual/Chapter-2.md) - "hints and kinks" to help you achieve initial system operation <br>
-[Chapter 3](docs/kim-1-users-manual/Chapter-3.md) - a more detailed description of the KIM-1 system hardware and software <br>
-[Chapter 4](docs/kim-1-users-manual/Chapter-4.md) - operating procedures for all system modes <br>
-[Chapter 5](docs/kim-1-users-manual/Chapter-5.md) - an example of a typical application program using all of the features of the KIM-1 system. <br>
+[Chapter 2](Chapter-2-Getting-Started.md) - "hints and kinks" to help you achieve initial system operation <br>
+[Chapter 3](Chapter-3.md) - a more detailed description of the KIM-1 system hardware and software <br>
+[Chapter 4](Chapter-4.md) - operating procedures for all system modes <br>
+[Chapter 5](Chapter-5.md) - an example of a typical application program using all of the features of the KIM-1 system. <br>
 
 At some future time, you may find it desirable to expand the KIM-1 system to incorporate more memory, different types of memory, or addi­ tional input/output capability. Again, we have tried to make system expansion as simple as possible with all required interface signals brought out to a special connector on the module. Watch for:
 
-[Chapter 6](docs/kim-1-users-manual/Chapter-6.md) - a guide to system expansion for increasing both memory and input/output capability
+[Chapter 6](Chapter-6.md) - a guide to system expansion for increasing both memory and input/output capability
 
 Despite our best efforts to provide you with a fully operable and reliable system, you might encounter some difficulties with your KIM-1 module. If so, refer to:
 
-[Chapter 7](docs/kim-1-users-manual/Chapter-7.md) - some guidance on warranty and service procedures for your KIM-1 module
+[Chapter 7](Chapter-7.md) - some guidance on warranty and service procedures for your KIM-1 module
 
 Following the basic text of this manual, you will find a series of Appendices intended to provide you with detailed information on certain specialized subjects of interest to you in understanding the operation of the KIM-1 system.
 
