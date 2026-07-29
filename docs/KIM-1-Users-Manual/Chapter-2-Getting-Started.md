@@ -36,14 +36,14 @@ After unpacking the KIM-1 module, locate the small hardware packet and install t
 Place the module such that the keyboard is to your lower right and observe that two connector locations extend from the module to your left. The connector area on the lower left is referred to as the Application connector (A) . You will note that a 44 pin board edge connector is already installed at this location. The connector area to the upper left is for use by you for future system expansion and is referred to as the Expansion connector (E).
 
 <figure>
-    <img src="/img/figure-2.1.png" alt="Figure 2.1 KIM-1 Module">
+    <img src="../img/figure-2.1.png" alt="Figure 2.1 KIM-1 Module">
     <figcaption>Figure 2.1 KIM-1 Module</figcaption>
 </figure>
 
 Remove the (A) connector from the module and connect the pins as shown in the sketch.
 
 <figure>
-    <img src="/img/figure-2.2.png" alt="Figure 2.2 Power Supply Connections">
+    <img src="../img/figure-2.2.png" alt="Figure 2.2 Power Supply Connections">
     <figcaption>Figure 2.2 Power Supply Connections</figcaption>
 </figure>
 
@@ -174,7 +174,7 @@ In selecting a tape unit for use with your KIM-1 system, you should verify that 
 To connect your tape unit to the KIM-1 module, turn off the power supplies and remove the connector (A) from the module. Add the wires shown in the sketch:
 
 <figure>
-    <img src="/img/figure-2.3.png" alt="Figure 2.3 Audio Tape Connections">
+    <img src="../img/figure-2.3.png" alt="Figure 2.3 Audio Tape Connections">
     <figcaption>Figure 2.3 Audio Tape Connections</figcaption>
 </figure>
 
@@ -276,7 +276,7 @@ To connect the TTY to the system, proceed as follows:
 2. Add the wires shown in the sketch to connector (A) and to the appropriate connector on the TTY unit. <br>
 
 <figure>
-    <img src="/img/figure-2.4.png" alt="TTY Connections">
+    <img src="../img/figure-2.4.png" alt="TTY Connections">
     <figcaption>Figure 2.4 TTY Connections</figcaption>
 </figure>
 
