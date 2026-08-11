@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  
+<table>
+
+  <tr>
+    <td>ADDRESS</td><td>AREA</td><td>LABEL</td><td>FUNCTION</td>
+  </tr>
+  <tr>
+    <td>0x00EF</td><td rowspan="7">Machine Register Storage Buffer</td><td>PCL</td><td>Program Counter - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x00F0</td><td>PCH</td><td>Program Counter - High Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x00F1</td><td>P</td><td>Status Register</td>
+  </tr>
+  <tr>
+    <td>0x00F2</td><td>SP</td><td>Stack Pointer</td>
+  </tr>
+  <tr>
+    <td>0x00F3</td><td>A</td><td>Accumulator</td>
+  </tr>
+  <tr>
+    <td>0x00F4</td><td>Y</td><td>Y-Index Register</td>
+  </tr>
+  <tr>
+    <td>0x00F5</td><td>X</td><td>X-Index Register</td>
+  </tr>
+
+  <tr>
+    <td>0x1700</td><td rowspan="4">Application I/O</td><td>PAD</td><td>6530-003 A Data Register</td>
+  </tr>
+  <tr>
+    <td>0x1701</td><td>PADD</td><td>6530-003 A Data Direction Register</td>
+  </tr>
+  <tr>
+    <td>0x1702</td><td>PBD</td><td>6530-003 B Data Register</td>
+  </tr>
+  <tr>
+    <td>0x1703</td><td>PBDD</td><td>6530-003 B Data Direction Register</td>
+  </tr>
+
+  <tr>
+    <td>0x1704</td><td rowspan="3">Interval Timer</td><td rowspan="3"></td><td rowspan="3">6530-003 Interval Timer <br> (See Section 1.6 of Hardware Manual)</td>
+  </tr>
+  <tr>
+    <td>TO</td>
+  </tr>
+  <tr>
+    <td>0x170F</td>
+  </tr>
+
+  <tr>
+    <td>0x17F5</td><td rowspan="5">Audio Tape<br>Load & Dump</td><td>SAL</td><td>Starting Address - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17F6</td><td>SAH</td><td>Program Counter - High Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17F7</td><td>EAL</td><td>Ending Address - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17F8</td><td>EAH</td><td>Ending Address - High Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17F9</td><td>ID</td><td>File Identification Number</td>
+  </tr>
+
+  <tr>
+    <td>0x17FA</td><td rowspan="6">Interrupt Vectors</td><td>NMIL</td><td>NMI Vector - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17FB</td><td>NMIH</td><td>NMI Vector- High Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17FC</td><td>RSTL</td><td>RST Vector - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17FD</td><td>RSTH</td><td>RST Vector - High Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17FE</td><td>IRQL</td><td>IRQ Vector - Low Order Byte</td>
+  </tr>
+  <tr>
+    <td>0x17FF</td><td>IRQH</td><td>IRQ Vector - Highow Order Byte</td>
+  </tr>
+
+</table>
+
+</body>
+</html>

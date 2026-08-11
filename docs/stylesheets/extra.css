@@ -1,0 +1,328 @@
+/* ==========================================================================
+   KIM-1 User Manual -- house theme for mkdocs-material
+   Palette after MOS Technology / KIM-1 materials, c. 1976.
+   Token values are deliberately shared with gen_memmap.py and
+   gen_blockdiag.py so figures sit on the page as if printed there.
+   ========================================================================== */
+
+:root {
+  /* --- shared with the SVG generators ---------------------------------- */
+  --kim-paper:      #fbfaf7;   /* ground in both scripts                    */
+  --kim-paper-alt:  #f2efe9;   /* FILL_ALT: ROM blocks, MPU array           */
+  --kim-ink:        #2b2b2b;   /* STROKE                                    */
+  --kim-ink-dim:    #6b6b6b;   /* INK_DIM                                   */
+  --kim-rule:       #ddd8cc;   /* hairline, derived from paper-alt          */
+
+  /* --- accents ---------------------------------------------------------- */
+  --kim-blue:       #17406b;   /* MOS wordmark blue: chrome, links          */
+  --kim-blue-lit:   #2e6db4;   /* link hover, dark-mode links               */
+  --kim-led:        #e33b2e;   /* the six seven-segment digits              */
+  --kim-led-bright: #ff4a35;
+  --kim-led-bezel:  #100d0c;   /* display window                            */
+  --kim-hex:        #8a2e22;   /* damped LED red, for inline hex            */
+  --kim-pcb:        #35603f;   /* soldermask green: notes, tips             */
+  --kim-board:      #101416;   /* dark-mode ground                          */
+
+  /* --- keycaps ---------------------------------------------------------- */
+  --kim-key:        #2b2b2b;
+  --kim-key-edge:   #101010;
+  --kim-legend:     #eceae4;
+
+  /* --- type: same stacks as the SVGs, so no webfont round-trip ---------- */
+  --kim-sans: Avenir, "Trebuchet MS", Verdana, sans-serif;
+  --kim-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ==========================================================================
+   1. Material scheme wiring
+   ========================================================================== */
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--kim-blue);
+  --md-primary-fg-color--light: var(--kim-blue-lit);
+  --md-primary-fg-color--dark:  #0f2f50;
+  --md-accent-fg-color:         var(--kim-led);
+
+  --md-default-bg-color:        var(--kim-paper);
+  --md-default-fg-color:        var(--kim-ink);
+  --md-default-fg-color--light: var(--kim-ink-dim);
+  --md-typeset-color:           var(--kim-ink);
+  --md-typeset-a-color:         var(--kim-blue);
+  --md-code-bg-color:           var(--kim-paper-alt);
+  --md-code-fg-color:           var(--kim-ink);
+  --md-footer-bg-color:         var(--kim-blue);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #0f2f50;
+  --md-accent-fg-color:         var(--kim-led-bright);
+
+  --md-default-bg-color:        var(--kim-board);
+  --md-default-fg-color:        #ddd9d0;
+  --md-typeset-color:           #ddd9d0;
+  --md-typeset-a-color:         #7fa8d4;
+  --md-code-bg-color:           #1a1f22;
+  --md-code-fg-color:           #ddd9d0;
+  --md-footer-bg-color:         #0b0e10;
+
+  --kim-paper-alt:  #1a1f22;
+  --kim-rule:       #2c3236;
+  --kim-ink:        #ddd9d0;
+  --kim-ink-dim:    #9a958c;
+  --kim-hex:        #f08a72;
+  --kim-key:        #2f3438;
+  --kim-key-edge:   #464c50;
+  --kim-pcb:        #6f9e79;
+}
+
+/* ==========================================================================
+   2. Typography -- period feel from spacing and case, not novelty faces
+   ========================================================================== */
+
+body, input, .md-typeset { font-family: var(--kim-sans); }
+code, kbd, pre, samp, .md-typeset code { font-family: var(--kim-mono); }
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: var(--kim-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--kim-blue);
+}
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 { color: #7fa8d4; }
+
+.md-typeset h1 { font-size: 1.5rem; }
+.md-typeset h2 {
+  font-size: 1.15rem;
+  border-bottom: 1px solid var(--kim-rule);
+  padding-bottom: 0.35em;
+}
+.md-typeset h3 { font-size: 0.95rem; letter-spacing: 0.1em; }
+.md-typeset h4 { text-transform: none; letter-spacing: 0.02em; }
+
+.md-typeset { line-height: 1.72; }
+
+/* ==========================================================================
+   3. The four house conventions
+   ========================================================================== */
+
+/* 3.1 Physical keys -- KIM-1 keypad caps: dark face, light legend ---------- */
+.md-typeset kbd,
+kbd {
+  display: inline-block;
+  font-family: var(--kim-mono);
+  font-size: 0.78em;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  padding: 0.12em 0.5em;
+  min-width: 1.6em;
+  text-align: center;
+  color: var(--kim-legend);
+  background: var(--kim-key);
+  border: 1px solid var(--kim-key-edge);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  vertical-align: 0.05em;
+}
+
+/* 3.2 Hex values -- damped LED red on paper. Deliberately quieter than
+       <samp>: address tables are dense, and a full display treatment on
+       every value turns a table into a light show. -------------------------- */
+.md-typeset code.hex,
+code.hex {
+  font-family: var(--kim-mono);
+  font-size: 0.86em;
+  color: var(--kim-hex);
+  background: var(--kim-paper-alt);
+  border: 1px solid var(--kim-rule);
+  border-radius: 2px;
+  padding: 0.05em 0.35em;
+  white-space: nowrap;
+  font-feature-settings: "zero" 1;   /* slashed zero where the face has one */
+}
+
+/* Inside tables the borders stack up; drop to bare ink. */
+.md-typeset table code.hex {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* 3.3 Machine output -- the seven-segment display itself ------------------ */
+.md-typeset samp,
+samp {
+  display: inline-block;
+  font-family: var(--kim-mono);
+  font-size: 0.9em;
+  letter-spacing: 0.22em;
+  color: var(--kim-led);
+  background: var(--kim-led-bezel);
+  border-radius: 3px;
+  padding: 0.15em 0.6em 0.15em 0.8em;
+}
+[data-md-color-scheme="slate"] .md-typeset samp {
+  color: var(--kim-led-bright);
+  background: #000;
+}
+
+/* Block-level output: a full display window. Wrap in <pre><samp>…</samp></pre> */
+.md-typeset pre > samp {
+  display: block;
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+  padding: 0.8em 1em;
+}
+
+/* 3.4 Code and mnemonics -------------------------------------------------- */
+.md-typeset code {
+  background: var(--kim-paper-alt);
+  border-radius: 2px;
+  padding: 0.05em 0.35em;
+}
+.md-typeset pre > code {
+  border: 1px solid var(--kim-rule);
+  border-radius: 3px;
+  padding: 0.8em 1em;
+}
+.md-typeset .highlight { font-size: 0.82rem; }
+
+/* 3.5 Proposed: physical slide switches (SST, SINGLE STEP, ON/OFF).
+       Distinct from <kbd> -- a switch has a position, a key does not.
+       Markup:  <span class="switch">SST</span>
+                <span class="switch" data-pos="ON">SST</span>          -------- */
+.switch {
+  display: inline-block;
+  font-family: var(--kim-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kim-ink);
+  background: var(--kim-paper-alt);
+  border: 1px solid var(--kim-ink-dim);
+  border-radius: 9px;                 /* pill: reads as a travelling slider */
+  padding: 0.1em 0.55em;
+  vertical-align: 0.05em;
+}
+.switch[data-pos]::after {
+  content: " " attr(data-pos);
+  color: var(--kim-pcb);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   4. Figures -- SVGs are already on --kim-paper, so mount them flush
+   ========================================================================== */
+
+.md-typeset figure {
+  margin: 1.8em 0;
+  background: var(--kim-paper);
+  border: 1px solid var(--kim-rule);
+  border-radius: 3px;
+  padding: 0.75em;
+}
+[data-md-color-scheme="slate"] .md-typeset figure {
+  background: var(--kim-paper);       /* keep the figure on its own paper */
+  border-color: #2c3236;
+}
+.md-typeset figure img,
+.md-typeset figure svg { max-width: 100%; height: auto; }
+
+.md-typeset figcaption {
+  margin-top: 0.7em;
+  font-family: var(--kim-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kim-ink-dim);
+  text-align: left;
+}
+.md-typeset figcaption strong { color: var(--kim-blue); font-weight: 700; }
+
+/* ==========================================================================
+   5. Tables -- typewritten register listings: hairlines, no zebra
+   ========================================================================== */
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--kim-rule);
+  border-radius: 0;
+  font-size: 0.76rem;
+  box-shadow: none;
+}
+.md-typeset table:not([class]) th {
+  background: var(--kim-paper-alt);
+  color: var(--kim-ink);
+  font-family: var(--kim-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.68rem;
+  border-bottom: 1px solid var(--kim-ink-dim);
+}
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--kim-rule);
+  vertical-align: baseline;
+}
+.md-typeset table:not([class]) tr:hover { background: var(--kim-paper-alt); }
+
+/* Opt-in monospaced column: <td class="addr">  or  markdown attr_list  */
+.md-typeset td.addr,
+.md-typeset th.addr { font-family: var(--kim-mono); white-space: nowrap; }
+
+/* ==========================================================================
+   6. Admonitions -- three roles, three colours
+   ========================================================================== */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: none;
+  border-left: 3px solid var(--kim-blue);
+  border-radius: 0;
+  background: var(--kim-paper-alt);
+  box-shadow: none;
+  font-size: 0.78rem;
+}
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: none;
+  font-family: var(--kim-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+}
+.md-typeset .admonition-title::before,
+.md-typeset summary::before { display: none; }
+
+.md-typeset .note        { border-left-color: var(--kim-blue); }
+.md-typeset .tip,
+.md-typeset .success     { border-left-color: var(--kim-pcb); }
+.md-typeset .warning,
+.md-typeset .danger      { border-left-color: var(--kim-led); }
+
+/* Quoting the original manual verbatim: typewriter, on paper.
+   Markup:  !!! quote "From the manual, p. 42"  ---------------------------- */
+.md-typeset .quote {
+  border-left-color: var(--kim-ink-dim);
+  background: var(--kim-paper);
+  font-family: var(--kim-mono);
+  font-size: 0.74rem;
+}
+
+/* ==========================================================================
+   7. Chrome
+   ========================================================================== */
+
+.md-header { box-shadow: none; border-bottom: 2px solid var(--kim-led); }
+.md-header__title { letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+.md-tabs { border-bottom: none; }
+
+.md-nav { font-size: 0.68rem; }
+.md-nav__title { text-transform: uppercase; letter-spacing: 0.1em; }
+.md-nav__link--active { color: var(--kim-blue); font-weight: 700; }
+
+.md-typeset hr { border-bottom: 1px solid var(--kim-rule); }
+.md-search__form { border-radius: 2px; }

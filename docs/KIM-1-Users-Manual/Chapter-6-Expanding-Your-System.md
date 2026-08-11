@@ -1,0 +1,53 @@
+**TODO: Insert links to appendixes**
+
+# Chapter 6 - Expanding Your System
+
+In earlier sections you have learned that the MCS 6502 Microprocessor Array is capable of directly addressing up to 65,536 locations (bytes) of memory. (Usually abbreviated to 65K where "K" for the remainder of this section is to mean 1024 memory locations). In this section, we will discuss first the techniques for adding memory or I/O locations to the system and next, the proper handling of interrupt vectors in an expanded system.
+
+## Memory and I/O Expansion
+In the KIM-1 system, the management of input/output data is handled exactly the same as transfers to or from any other memory location in the system. There are no instructions dealing specifically with input/output transfers. Instead, transfer of data is accomplished by reading from or writing to registers connected to the data bus and to I/O pins in specific I/O interface devices (such as the 6530 array). These registers have a specific address in the system just as does any other memory location. Therefore, when we speak of expanding the memory of the KIM-1 system, we are defining the methods for expanding both the real memory (RAM, ROM, PROM, etc.) as well as the I/O ports since they are both treated exactly alike as far as address assignments are concerned.
+
+The first and most easilly implemented memory expansion is the addition of up to 4K of memory space. You will recall that the lowest 8K memory locations are defined by an address decoder included on the KIM-1 module, (Device U4 on the schematic). The eight outputs of this decoder (K0 to K7) each define a 1K block of addresses in the lowest 8K of the memory map. Three of the outputs (K5, K6, K7) are used to select ROM, RAM, I/O and Timer locations on the two 6530 arrays while a fourth (K0) is used to select the 1024 locations of the static RAM memory. The remaining four outputs (Kl, K2, K3, K4) are not used on the KIM-l module but instead, are brought out to the Expansion connector for use as chip selects for memory or I/O additions.
+
+Figure 6-1 shows the proper method for deriving the four chip select signals for the additional 4K of memory. Note that one of input pins of the decoder (D) was brought out to the Application Connector. It was this pin which we asked you to connect to ground in Chapter 2 of this manual. As long as this point remains connected to ground, the decoder will always select the lowest 8K addresses of the memory field regardless of the state of AB13, AB14, and AB15.
+
+If you wish to expand the memory and I/O address space beyond the lower 8K addresses, you must arrange to de-select the lower 8K memory block while selecting some other 8K block. One suggested method for expanding beyond the lower 8K space is shown in Figure 6-2.
+
+Note that the three high order address bits (AB13, AB14, AB15) are connected to a decoder. The eight outputs of the decoder act to divide the total 65K memory space into eight blocks of 8K each (8K0, 8K1, etc.). Now, the 8K0 output may be returned as the fourth input (D) to the decoder (U4) on the KIM-1 module causing the proper selection and de-selection of this block within the total address space. The remaining seven outputs (8K1 to 8K7) may be used to select and de-select the additional decoders shown in Figure 6-2. You need add only as many decoders (one for each 8K block of memory) as you need for your desired memory expansion.
+
+A word of caution is in order when you decide to add memory to your system. You have noticed the inclusion of the line receivers for the ABIO, ABll, and AB12 signals, (See Figure 6-2). These devices are included because of loading limitations placed on the address bus lines of the 6502 array (Each such line is capable of driving one standard TTL load and 130pf of capacity. See Appendix G)
+
+**TODO: Insert figure 6.1 here**
+
+**TODO: Insert figure 6.2 here**
+
+Before deciding how to expand your system, we recommend a careful study of all of the loading limitations of the KIM-1 signals since almost certainly you will require additional buffering circuits if correct operation is to be achieved.
+
+## Interrupt Vector Management
+
+We have referred several times in earlier sections to the interrupt features of the 6502 Microprocessor Array. We suggest now a careful readin-g of Section 9 of the Programming Manual for the subject "Reset and Interrupt Considerations".
+
+In summary, there are three possible types of interrupt: Reset, NMI, and IRQ. Each will occur in response to an activation of one of the three pins of the 6502 array (<span style="text-decoration: overline;">RST</span>, <span style="text-decoration: overline;">NMI</span>, <span style="text-decoration: overline;">IRQ</span>). In response to these inputs, the 6502 array will fetch the data stored at a specific pair of addresses and load the data fetched into the program counter. The addresses are hardware determined and not under the control of the programmer. The specific addresses for each type of interrupt are:
+
+- <code class="HEX">0xFFFA</code>, <code class="HEX">0xFFFB</code> - <span style="text-decoration: overline;">NMI</span> Vector
+- <code class="HEX">0xFFFC</code>, <code class="HEX">0xFFFD</code> - <span style="text-decoration: overline;">RST</span> Vector
+- <code class="HEX">0xFFFE</code>, <code class="HEX">0xFFFF</code> - <span style="text-decoration: overline;">IRQ</span> Vector
+
+You will note that these addresses define the highest six locations in the 65K memory map.
+
+In the KIM-1 system, three address bits (AB13, AB14, AB15) are not decoded at all. Therefore, when the 6502 array generates a fetch from <code class="HEX">0xFFFC</code>  and <code class="HEX">0xFFFD</code>  in response to a <span style="text-decoration: overline;">RST</span> input, these addresses will be read as IFFC and IFFD and the reset vector will be fetched from these locations. You now see that all interrupt vectors will be fetched from the top 6 locations of the lowest 8K block of memory which is the only memory block decoded for the unexpanded KIM-1 system.
+
+It is typical in any system to store the interrupt vectors in ROM so that they are immediately available after power-on. However, it is desirable that for the<span style="text-decoration: overline;">NMI</span>and<span style="text-decoration: overline;">IRQ</span>interrupts, the programmer be allowed to define as a variable the exact vector to which these interrupts will direct the system. Accordingly, the<span style="text-decoration: overline;">NMI</span>and<span style="text-decoration: overline;">IRQ</span>vector locations contain an indirect jump instruction referencing a RAM location into which the programmer will store the specific vector for the two types of interrupt. In the KIM-1 system, locations <code class="HEX">0x17FA</code> and <code class="HEX">0x17FB</code> contain the actual<span style="text-decoration: overline;">NMI</span>vector and <code class="HEX">0x17FE</code> with <code class="HEX">0x17FF</code> contain the actual<span style="text-decoration: overline;">IRQ</span>vector. The<span style="text-decoration: overline;">RST</span>vector is not handled in this manner and always directs the system to the first step of the power-on initialization routine.
+
+But what happens if we expand our memory above the lowest 8K block included in the KIM-1 system? Recall that we now must use AB13, AB14, and AB15 to decode the additional address locations of the memory. By so doing, the interrupt vector locations are no longer located in the K7 memory block since the decoder (U4) is de-selected in response to the addresses generated by the 6502 array in fetching the interrupt vectors (<code class="HEX">0xFFFA</code> for example) . We would have the same problem even in an unexpanded system if we wished to use a<span style="text-decoration: overline;">RST</span>vector and initialization routine different than what the KIM-1 system provides and if the <span style="text-decoration: overline;">RST</span>vector was to be located in a IK block lower than K7 (K0 for instance).
+
+The solution to this dilemma is to generate logically a special signal for Interrupt select. Referring to Figure 6-2, a special signal called "Vector Select" is created to define the highest IK memory block (K65) . The fetch of any interrupt vector will cause this signal to go low "Select". Assuming that the K65 state is not used to select RAM, this signal may be "wire-or'd" with any one of the other "K" signals (K0 to K64) to define exactly which IK block is to contain the interrupt vectors.
+
+As an example, assume that you have connected the K65 "Vector Select" line to the K0 line. When a <span style="text-decoration: overline;">RST</span> occurs, the 6502 array generates a fetch from locations <code class="HEX">0xFFFC</code> and <code class="HEX">0xFFFD.</code> These addresses cause K65 to be selected which, in turn, accesses the K0 field of the memory and causes the actual fetch of the <span style="text-decoration: overline;">RST</span> vector from locations <code class="HEX">0x03FC</code> and <code class="HEX">0x03FD</code>. (Had you chosen to connect K65 to K7, the fetch of the reset vectors would occur from locations <code class="HEX">0x1FFC</code> and <code class="HEX">0x1FFD</code>).
+
+In this way, the highest six addresses of any IK block of memory may be used to supply the interrupt vectors for the system. If desired, a switch could be installed to allow you to select different areas of memory as the source locations for the interrupt vectors. (By the way, we selected the 75145 type decoders in Figure 6-2 specifically to allow the "wire-or" of K65 with any other K. This is possible because the 75145 decoder is provided with open-collector outputs which allows "wire-or" of several states using an external load resistor.)
+
+An even simpler arrangement using the "Vector Select" approach is shown in Figure 6-3. Here, the KIM-1 system is assumed to have only the lower 8K of memory in place. The address decoder (U4) is de-selected using the AB15 signal which becomes "true" whenever an interrupt vector fetch is initiated by the system. The same signal (AB15) is inverted and "wire-or 'd" through a switch to the K0 or the K7 chip select lines. Now, depending upon the position of the switch, interrupt vectors will be fetched from the top 6 addresses of either block K0 or K7. K0 in the
+KIM-1 system is the RAM and K7 is the ROM in the 6530-002 array (the operating program). In this way, you may have two different sets of interrupt vectors in your system and may select which set is to be used with a simple switch.
+
+**TODO: Insert figure 6.3 here**

@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------------
+# Drop these blocks into mkdocs.yml. Save extra.css as docs/stylesheets/extra.css
+# ---------------------------------------------------------------------------
+
+site_name: KIM-1 User Manual
+
+theme:
+  name: material
+  features:
+    - navigation.sections      # manual chapters as flat labelled groups
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/lightbulb
+        name: Dark
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/lightbulb-off
+        name: Light
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - md_in_html          # required: lets <kbd>/<samp>/<code class="hex"> nest in HTML blocks
+  - attr_list          # required: adds .addr to table cells, .switch spans
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      permalink: "#"
+
+# ---------------------------------------------------------------------------
+# Figure markup the CSS expects (md_in_html):
+#
+#   <figure markdown>
+#   ![](../img/figure-3.12.svg)
+#   <figcaption><strong>Figure 3.12</strong> KIM-1 memory map</figcaption>
+#   </figure>
+#
+# Block machine output:
+#
+#   <pre><samp>0017F5 A9</samp></pre>
+#
+# Slide switch (proposed convention, distinct from a keypad key):
+#
+#   Set <span class="switch" data-pos="ON">SST</span> before pressing <kbd>GO</kbd>.
+#
+# Address column in a table (attr_lists):
+#
+#   | Address | Contents |
+#   |---------|----------|
+#   | `0x17F5` {.addr} | vector |
+# ---------------------------------------------------------------------------

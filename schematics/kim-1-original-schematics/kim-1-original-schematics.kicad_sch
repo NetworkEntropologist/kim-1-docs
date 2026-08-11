@@ -1,0 +1,65 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "0a29e2b8-5bf7-4ea9-85d7-3edd99f3af57")
+	(paper "A4")
+	(title_block
+		(title "KIM-1 Microcomputer Module")
+		(company "The Network Entropologist")
+		(comment 1 "Redrawn Schematics")
+	)
+	(lib_symbols)
+	(sheet
+		(at 63.5 73.66)
+		(size 16.51 7.62)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "755d336c-884b-4297-98b7-d39883824e15")
+		(property "Sheetname" "Recommended Power Supply"
+			(at 63.5 72.9484 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "recommended-psu.kicad_sch"
+			(at 63.5 81.8646 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "kim-1-original-schematics"
+				(path "/0a29e2b8-5bf7-4ea9-85d7-3edd99f3af57"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
